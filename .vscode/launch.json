@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": ".NET Core Launch (web)",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "program": "${workspaceFolder}/EmployeeManagement.API/bin/Debug/net8.0/EmployeeManagement.API.dll",
+        "args": [],
+        "cwd": "${workspaceFolder}/EmployeeManagement.API",
+        "stopAtEntry": false,
+        "serverReadyAction": {
+          "action": "openExternally",
+          "pattern": "Now listening on: (https?://\\S+)"
+        },
+        "env": {
+          "ASPNETCORE_ENVIRONMENT": "Development",
+          "ASPNETCORE_URLS": "http://0.0.0.0:5000"
+        },
+        "sourceFileMap": {
+          "/Views": "${workspaceFolder}/EmployeeManagement.API/Views"
+        }
+      }
+    ]
+  }
+  

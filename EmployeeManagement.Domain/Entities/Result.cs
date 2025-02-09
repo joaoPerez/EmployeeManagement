@@ -1,4 +1,4 @@
-namespace EmployeeManagement.Domain.Entities
+namespace EmployeeManagement.Domain
 {
     public class Result<T>
     {
@@ -6,15 +6,17 @@ namespace EmployeeManagement.Domain.Entities
         public T? Value { get; }
         public List<string> Errors { get; }
 
-        protected Result(bool isSuccess, T? value, List<string> errors)
+        private Result(T? value, bool isSuccess, List<string> errors)
         {
-            IsSuccess = isSuccess;
             Value = value;
+            IsSuccess = isSuccess;
             Errors = errors;
         }
 
-        public static Result<T> Success(T value) => new Result<T>(true, value, new List<string>());
-        public static Result<T> Fail(List<string> errors) => new Result<T>(false, default, errors);
-        public static Result<T> Fail(string error) => new Result<T>(false, default, new List<string> { error });
+        public static Result<T> Success(T value) =>
+            new(value, true, []);
+
+        public static Result<T> Failure(List<string> errors) =>
+            new(default, false, errors);
     }
 }
