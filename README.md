@@ -15,3 +15,4 @@ http://localhost:5000/swagger
 
 Frontend:
 
+http://localhost:4200/
