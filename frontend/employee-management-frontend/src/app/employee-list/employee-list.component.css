@@ -1,0 +1,9 @@
+/* src/app/employee-list/employee-list.component.css */
+.spacer {
+    flex: 1 1 auto;
+  }
+  
+  .table-container {
+    padding: 16px;
+  }
+  

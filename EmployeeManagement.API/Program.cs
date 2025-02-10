@@ -8,8 +8,20 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using EmployeeManagement.Domain.Entities;
 using Microsoft.OpenApi.Models;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy
+          .AllowAnyOrigin()    // Allow requests from any origin. Adjust this for production.
+          .AllowAnyMethod()    // Allow GET, POST, PUT, DELETE, OPTIONS, etc.
+          .AllowAnyHeader();   // Allow any header.
+    });
+});
 
 // Configure logging.
 builder.Logging.ClearProviders();
@@ -86,7 +98,15 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
+
+
 var app = builder.Build();
+
+app.UseCors("AllowAll");
 
 using (var scope = app.Services.CreateScope())
 {

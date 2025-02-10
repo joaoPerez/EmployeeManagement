@@ -1,0 +1,12 @@
+/* src/app/login/login.component.css */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  mat-card {
+    width: 400px;
+  }
+  

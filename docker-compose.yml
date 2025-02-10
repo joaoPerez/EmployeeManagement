@@ -15,17 +15,28 @@ services:
 
   employee_api:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: .    # Repository root is the build context.
+      dockerfile: EmployeeManagement.API/Dockerfile
     container_name: employee_api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - Jwt__Key=this_is_a_super_secret_key_1234567890!@#$
       - Jwt__Issuer=EmployeeManagementAPI
+      - ConnectionStrings__EmployeeDatabase=Server=mysql;Port=3306;Database=EmployeeDB;Uid=root;Pwd=yourpassword;AllowPublicKeyRetrieval=True;SslMode=None;
     depends_on:
       - mysql
     ports:
       - "5000:80"
+
+  employee_frontend:
+    build:
+      context: ./frontend/employee-management-frontend
+      dockerfile: Dockerfile
+    container_name: employee_frontend
+    depends_on:
+      - employee_api
+    ports:
+      - "4200:4200"
 
 volumes:
   mysql_data:

@@ -1,0 +1,63 @@
+<!-- src/app/employee-list/employee-list.component.html -->
+<mat-toolbar color="primary">
+  <span>Employee Management</span>
+  <span class="spacer"></span>
+  <button mat-button routerLink="/employee/new">Add Employee</button>
+  <button mat-button (click)="logout()">Logout</button>
+</mat-toolbar>
+
+<div class="table-container">
+  <table mat-table [dataSource]="employees" class="mat-elevation-z8" style="width: 100%;">
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+
+    <!-- First Name Column -->
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef>First Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.firstName }}</td>
+    </ng-container>
+
+    <!-- Last Name Column -->
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef>Last Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+    <!-- Role Column -->
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef>Role</th>
+      <td mat-cell *matCellDef="let element">{{ element.role }}</td>
+    </ng-container>
+
+    <!-- Manager ID Column -->
+    <ng-container matColumnDef="managerId">
+      <th mat-header-cell *matHeaderCellDef>Manager ID</th>
+      <td mat-cell *matCellDef="let element">{{ element.managerId }}</td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="accent" (click)="editEmployee(element.id)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteEmployee(element.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
